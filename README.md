@@ -10,13 +10,6 @@
 * 服务端提供了对于文章的基本增删改查接口，使用`sqlite`数据来存储文章相应的标题、标签和分类等。
 * 前端能简单展示文章列表和文章内容，根据标签或者分类展示相关的文章。
 
-## 截图
-
-![展示图1](http://p9uc2ui6z.bkt.clouddn.com/github/my-blog-by-go/1.png)
-
-![展示图2](http://p9uc2ui6z.bkt.clouddn.com/github/my-blog-by-go/2.png)
-
-![展示图3](http://p9uc2ui6z.bkt.clouddn.com/github/my-blog-by-go/3.png)
 
 ## 启动项目
 
