@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>使用go搭建一个简易的博客</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><p></p><div class="toc"><h3>文章目录</h3><ul><li><a href="#go_4">使用go搭建一个简易的博客系统</a></li><ul><li><a href="#1_52">报错1</a></li><li><a href="#2_66">报错2</a></li></ul><li><a href="#nodejs__69">node.js 的安装</a></li><li><a href="#yarn_188">yarn的安装和使用（极其详细）</a></li><ul><li><a href="#yarn_190">一、yarn的简介：</a></li><li><a href="#yarn_193">二、yarn的特点：</a></li><li><a href="#yarn_200">三、yarn的安装:</a></li><li><a href="#yarn_211">五、yarn的常用命令：</a></li><li><a href="#npm__yarn_220">六、npm 与 yarn命令比较:</a></li><li><a href="#1_226">问题与解决1</a></li><li><a href="#2_247">问题与解决2</a></li></ul><li><a href="#_271">搭建成功</a></li><ul><li><a href="#3_275">问题3</a></li></ul></ul></div><p></p>
+<hr>
+<h1><a id="go_4"></a>使用go搭建一个简易的博客系统</h1>
+<p>后端使用Go语言开发，使用Web框架gin和ORM框架xorm。<br>
+前端使用React+Metrail-Ui+React-Router4。<br>
+命令行工具使用github.com/urfave/cli开发。<br>
+目前功能<br>
+命令行工具能对文章进行上传、删除、和进行请求Host进行配置。<br>
+服务端提供了对于文章的基本增删改查接口，使用sqlite数据来存储文章相应的标题、标签和分类等。<br>
+前端能简单展示文章列表和文章内容，根据标签或者分类展示相关的文章。</p>
+<p>启动项目<br>
+服务端<br>
+go get -u github.com/zachrey/my-blog-by-go</p>
+<p>cd $GOPATH/src/github.com/zachrey/my-blog-by-go/</p>
+<p>go run main.go<br>
+端口默认开启的是本地的3000。</p>
+<p>前端<br>
+cd $GOPATH/src/github.com/zachrey/my-blog-by-go/front_web</p>
+<p>yarn &amp;&amp; yarn start<br>
+命令行工具<br>
+cd $GOPATH/src/github.com/zachrey/my-blog-by-go/cmd</p>
+<p>go run main.go --help<br>
+这里，前后端和命令行工具都没有进行编译，直接在开发环境中演示。</p>
+<p>如果go 项目中有些依赖包下载不下来，建议翻墙或者去github找相应的库，然后将它clone到你的src/github文件夹相应路劲下。</p>
+<p>项目结构<br>
+.<br>
+├── cmd // 命令行工具<br>
+├── controllers // 控制器<br>
+├── database // 数据库连接，配置等<br>
+├── front_web // react前端内容<br>
+├── models // 数据库相关表的操作模板<br>
+├── posts // 存放上传的文章<br>
+├── routers // 路由<br>
+├── static // 静态文件资源，前端打包后就可以打包放到这里面<br>
+├── gin.log // web运行日志<br>
+├── main.go // 程序入口<br>
+├── README.md<br>
+└── vendor</p>
+<h2><a id="1_52"></a>报错1</h2>
+<pre><code class="prism language-bash">PS D:<span class="token punctuation">\</span>github.com<span class="token punctuation">\</span>yzdily<span class="token punctuation">\</span>my-blog-by-go-master<span class="token punctuation">\</span>cmd<span class="token operator">&gt;</span> go run main.go
+main.go:15:2: no required module provides package github.com/urfave/cli<span class="token punctuation">;</span> to <span class="token function">add</span> it:
+        go get github.com/urfave/cli
+PS D:<span class="token punctuation">\</span>github.com<span class="token punctuation">\</span>yzdily<span class="token punctuation">\</span>my-blog-by-go-master<span class="token punctuation">\</span>cmd<span class="token operator">&gt;</span> go get github.com/urfave/cli
+go: downloading github.com/urfave/cli v1.22.13
+go: downloading github.com/cpuguy83/go-md2man/v2 v2.0.2
+go: downloading github.com/russross/blackfriday/v2 v2.1.0
+go: added github.com/cpuguy83/go-md2man/v2 v2.0.2
+go: added github.com/russross/blackfriday/v2 v2.1.0
+go: added github.com/urfave/cli v1.22.13
+</code></pre>
+<h2><a id="2_66"></a>报错2</h2>
+<p><img src="https://img-blog.csdnimg.cn/0ddda10daae04dad884267297660c256.png" alt="在这里插入图片描述"></p>
+<h1><a id="nodejs__69"></a>node.js 的安装</h1>
+<p><img src="https://img-blog.csdnimg.cn/28c9455b680c43d8b7e88437f8eadd4d.png" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/556e7cebb2084aacb3af5816a7b26e23.png" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/462f1b99a8454d48aab93e371cc97df7.png" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/d44c5b6e8a87482e933d06a27faa47ed.png" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/18f8ee0440c346f1a1920fec2d30d9aa.png" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/a5af23fce3e74299807ab6f5665cc589.png" alt="在这里插入图片描述">点击【Install】按钮进行安装<br>
+<img src="https://img-blog.csdnimg.cn/75ba366f821b4b5493bcc34ae157cbb6.png" alt="在这里插入图片描述"><br>
+安装完毕，点击【Finish】按钮</p>
+<p>cmd-管理员身份运行，非管理员不显示<br>
+<img src="https://img-blog.csdnimg.cn/a449b84ee9f74695b495914ca3ade7fd.png" alt="在这里插入图片描述"><br>
+三、环境配置</p>
+<p>（1）找到安装的目录，在安装目录下新建两个文件夹【node_global】和【node_cache】</p>
+<p><img src="https://img-blog.csdnimg.cn/f7c595c3265548dbab9acd0bbdbfbec7.png" alt="在这里插入图片描述"></p>
+<p>（2）创建完毕后，使用管理员身份打开cmd命令窗口（打开方法见下方Tips），输入</p>
+<p>①npm config set prefix “你的路径\node_global” （复制你刚刚创建的“node_global”文件夹路径）</p>
+<p>npm config set prefix “D:\app\nodejs\node_global”<br>
+②npm config set cache “你的路径\node_cache”  （复制你刚刚创建的“node_cache”文件夹路径）</p>
+<p>npm config set cache “D:\app\nodejs\node_cache”</p>
+<p><img src="https://img-blog.csdnimg.cn/24208cda29f44a76833bdfc3d7e9ff19.png" alt="在这里插入图片描述"></p>
+<p>Tips: 使用管理员身份运行cmd的方法 ：点击左下角【开始】菜单，在搜索区域输入“命令提示符”，然后点击【以管理员身份运行】</p>
+<p>=<mark><mark><mark><mark><mark><mark><mark>或单击鼠标右键选择【以管理员身份运行】</mark></mark></mark></mark></mark></mark></mark>============</p>
+<p>（3）配置环境变量</p>
+<p>①【此电脑】-单击右键-【属性】-【高级系统设置】-【环境变量】</p>
+<p>② 在【系统变量】中点击【新建】</p>
+<p>变量名：NODE_PATH</p>
+<p>变量值：C:\Program Files\nodejs\node_global\node_modules</p>
+<p>D:\app\nodejs\node_global\node_modules</p>
+<p>然后你就会发现【node_global】里多出了一个【node_modules】文件夹</p>
+<p><img src="https://img-blog.csdnimg.cn/d0e1fbbb480946e280380e60237ba1d7.png" alt="在这里插入图片描述"></p>
+<p>Tips:  如果输入变量值之后没有自动创建【node_modules】文件夹，就在【node_global】下手动创建一个【node_modules】文件夹，再复制你创建的【node_modules】文件夹的路径地址到变量值</p>
+<p>③编辑【用户变量】中的【Path】</p>
+<p>④将默认的 C 盘下【 AppData\Roaming\npm 】修改成 【node_global】的路径，点击确定<br>
+<img src="https://img-blog.csdnimg.cn/cfbefcbb8d66475fb25ae59f4846d006.png" alt="在这里插入图片描述"></p>
+<p>⑤在【系统变量】中选择【Path】点击【编辑】添加【NODE_PATH】，随后一直点击【确定】</p>
+<p><img src="https://img-blog.csdnimg.cn/35824dda1e604b5a95c0f668de84f7f5.png" alt="在这里插入图片描述"></p>
+<p>四、测试</p>
+<p>配置完成后，全局安装一个最常用的 express 模块进行测试</p>
+<p>npm install express -g   // -g代表全局安装<br>
+出现以下界面即为配置成功<br>
+<img src="https://img-blog.csdnimg.cn/639cd7b636ce4ac3b5ac80080328e4a3.png" alt="在这里插入图片描述"></p>
+<p>Tips：如果出现安装失败的话可能是你没有使用管理员身份运行cmd窗口，或者可以修改一下【node_global】和【node_cache]的权限</p>
+<p>步骤： 鼠标右击【node_global】的文件夹，点击【属性】，再点击【安全】，再点击【编辑】，将权限都勾上，随即点击【确定】即可，【node_cache】步骤同理。</p>
+<p><img src="https://img-blog.csdnimg.cn/f6e545b832a34a31b829d0f816ceb0e8.png" alt="在这里插入图片描述"></p>
+<p>五、安装淘宝镜像</p>
+<p>①安装淘宝镜像</p>
+<p>npm config set registry https://registry.npm.taobao.org<br>
+查看是否成功：</p>
+<p>npm config get registry</p>
+<p><img src="https://img-blog.csdnimg.cn/b76681e15d3d49dd97d6e92aefb283ba.png" alt="在这里插入图片描述"></p>
+<p>②安装cnpm（按需安装）</p>
+<p>说明： npm是node官方的包管理器。cnpm是个中国版的npm，是淘宝定制的 cnpm (gzip 压缩支持) 命令行工具代替默认的 npm。</p>
+<p>npm install -g cnpm --registry=https://registry.npmmirror.com</p>
+<p>查看是否安装成功</p>
+<p>命令： cnpm -v</p>
+<h1><a id="yarn_188"></a>yarn的安装和使用（极其详细）</h1>
+<h2><a id="yarn_190"></a>一、yarn的简介：</h2>
+<p>Yarn是facebook发布的一款取代npm的包管理工具。</p>
+<h2><a id="yarn_193"></a>二、yarn的特点：</h2>
+<p>速度超快。<br>
+Yarn 缓存了每个下载过的包，所以再次使用时无需重复下载。 同时利用并行下载以最大化资源 利用率，因此安装速度更快。<br>
+超级安全。<br>
+在执行代码之前，Yarn 会通过算法校验每个安装包的完整性。<br>
+超级可靠。<br>
+使用详细、简洁的锁文件格式和明确的安装算法，Yarn 能够保证在不同系统上无差异的工作。</p>
+<h2><a id="yarn_200"></a>三、yarn的安装:</h2>
+<p>npm install -g yarn<br>
+npm uninstall yarn -g  //yarn卸载<br>
+<img src="https://img-blog.csdnimg.cn/60977f68c2384a50bc313c46c0a526ea.png" alt="在这里插入图片描述"></p>
+<p>配置环境变量<br>
+复制bin地址：D:\app\nodejs\node_global\node_modules\yarn\bin</p>
+<p>重要！添加D:\nodejs\node_global\node_modules\yarn\bin到系统变量-path 中，是为了 在windows-cmd中能启动 npm.cmd 文件!!</p>
+<p>重要！ 记得重新打开dos窗口（不管修改什么程序的环境变量，都必须重新打开dos窗口，才会生效）</p>
+<h2><a id="yarn_211"></a>五、yarn的常用命令：</h2>
+<p>yarn -v  // 查看yarn 版本<br>
+yarn config list  // 查看yarn配置<br>
+yarn config get registry   // 查看当前yarn源</p>
+<p>// 修改yarn源（此处为淘宝的源）<br>
+yarn config set registry https://registry.npm.taobao.org</p>
+<h2><a id="npm__yarn_220"></a>六、npm 与 yarn命令比较:</h2>
+<p>比如说你的项目模块依赖是图中描述的，@1.2.1代表这个模块的版本。在你安装A的时候需要安装依赖C和D，很多依赖不会指定版本号，默认会安装最新的版本，这样就会出现问题：比如今天安装模块的时候C和D是某一个版本，而当以后C、D更新的时候，再次安装模块就会安装C和D的最新版本，如果新的版本无法兼容你的项目，你的程序可能就会出BUG，甚至无法运行。这就是npm的弊端，而yarn为了解决这个问题推出了yarn.lock的机制，这是作者项目中的yarn.lock文件</p>
+<p>注意：这个文件不要手动修改它，当你使用一些操作如yarn add时，yarn会自动更新yarn.lock。</p>
+<h2><a id="1_226"></a>问题与解决1</h2>
+<pre><code class="prism language-bash">D:<span class="token punctuation">\</span>github.com<span class="token punctuation">\</span>yzdily<span class="token punctuation">\</span>my-blog-by-go-master<span class="token punctuation">\</span>front_web<span class="token operator">&gt;</span>yarn <span class="token operator">&amp;&amp;</span> <span class="token function">yarn</span> start
+<span class="token function">yarn</span> <span class="token function">install</span> v1.22.19
+<span class="token punctuation">[</span><span class="token number">1</span>/4<span class="token punctuation">]</span> Resolving packages<span class="token punctuation">..</span>.
+<span class="token punctuation">[</span><span class="token number">2</span>/4<span class="token punctuation">]</span> Fetching packages<span class="token punctuation">..</span>.
+info There appears to be trouble with your network connection. Retrying<span class="token punctuation">..</span>.
+info There appears to be trouble with your network connection. Retrying<span class="token punctuation">..</span>.
+error http://registry.npm.taobao.org/capture-stack-trace/download/capture-stack-trace-1.0.1.tgz: Integrity check failed <span class="token keyword">for</span> <span class="token string">"capture-stack-trace"</span> <span class="token punctuation">(</span>computed integrity doesn't match our records, got <span class="token string">"sha512-mYQLZnx5Qt1JgB1WEiMCf2647plpGeQ2NMR/5L0HNZzGQo4fuSPnK+wjfPnKZV0aiJDgzmWqqkV/g7JD+DW0qw== sha1-psC74fOPOqC5Ijjstv9Cw0TUE10="</span><span class="token punctuation">)</span>
+info Visit https://yarnpkg.com/en/docs/cli/install <span class="token keyword">for</span> documentation about this command.
+info There appears to be trouble with your network connection. Retrying<span class="token punctuation">..</span>.
+info There appears to be trouble with your network connection. Retrying<span class="token punctuation">..</span>.
+
+D:<span class="token punctuation">\</span>github.com<span class="token punctuation">\</span>yzdily<span class="token punctuation">\</span>my-blog-by-go-master<span class="token punctuation">\</span>front_web<span class="token operator">&gt;</span>npm <span class="token function">install</span> capture-stack-trace
+
+added <span class="token number">1387</span> packages <span class="token keyword">in</span> 2m
+</code></pre>
+<p>在运行就好了</p>
+<h2><a id="2_247"></a>问题与解决2</h2>
+<p><img src="https://img-blog.csdnimg.cn/74c58ac7f7cf48f7bff2ed3d38c5f913.png" alt="在这里插入图片描述"></p>
+<pre><code class="prism language-bash">Unhandled Rejection <span class="token punctuation">(</span>TypeError<span class="token punctuation">)</span>: console.err is not a <span class="token keyword">function</span>
+<span class="token punctuation">(</span>anonymous <span class="token keyword">function</span><span class="token punctuation">)</span>
+D:/github.com/yzdily/my-blog-by-go-master/front_web/src/components/Label.js:43
+  <span class="token number">40</span> <span class="token operator">|</span>         this.renderChip<span class="token punctuation">(</span>json.data<span class="token punctuation">)</span>
+  <span class="token number">41</span> <span class="token operator">|</span>       <span class="token punctuation">}</span>
+  <span class="token number">42</span> <span class="token operator">|</span>     <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token operator">&gt;</span> <span class="token number">43</span> <span class="token operator">|</span>     .catch<span class="token punctuation">(</span>err <span class="token operator">=</span><span class="token operator">&gt;</span> console.err<span class="token punctuation">(</span><span class="token string">"ERROR: "</span>, err<span class="token punctuation">))</span>
+  <span class="token number">44</span> <span class="token operator">|</span> <span class="token punctuation">}</span>
+  <span class="token number">45</span> <span class="token operator">|</span> 
+  <span class="token number">46</span> <span class="token operator">|</span> handleClick <span class="token operator">=</span> <span class="token punctuation">(</span>id, label<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">&gt;</span> <span class="token punctuation">{</span>
+View compiled
+This <span class="token function">screen</span> is visible only <span class="token keyword">in</span> development. It will not appear <span class="token keyword">if</span> the app crashes <span class="token keyword">in</span> production.
+</code></pre>
+<p>这个两个错误提示表明在 JavaScript 代码中使用了一个未定义的 console.err 函数，导致运行时出现了类型错误。事实上，应该使用的是 console.error 函数。</p>
+<p>因此，可以将 console.err("ERROR: ", err) 改为 console.error("ERROR: ", err) 来消除这个错误。这样就能够在控制台输出错误信息，并帮助你更好地调试和修复代码问题。</p>
+<h1><a id="_271"></a>搭建成功</h1>
+<p><img src="https://img-blog.csdnimg.cn/256d4e5dccac4dcd81a497c541f5ed9c.png" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/e0ebf35060fa4bb89e89fa9fd4299245.png" alt="在这里插入图片描述"></p>
+<h2><a id="3_275"></a>问题3</h2>
+<p><img src="https://img-blog.csdnimg.cn/580c92d6c3cc4adc9988b73bc7ec19b9.png" alt="在这里插入图片描述"></p>
+<pre><code class="prism language-bash">D:<span class="token punctuation">\</span>github.com<span class="token punctuation">\</span>yzdily<span class="token punctuation">\</span>my-blog-by-go-master<span class="token operator">&gt;</span>go get github.com/zachrey/blog/routers
+go: github.com/zachrey/blog/routers: <span class="token function">git</span> init --bare <span class="token keyword">in</span> 
+</code></pre>
+<p><img src="https://img-blog.csdnimg.cn/06c0f53926f9409782ba77acef9f6a9d.png" alt="在这里插入图片描述"><br>
+exe文件点击安装<br>
+<img src="https://img-blog.csdnimg.cn/fb0cc8a589094f88aed494f3a55dbd89.png" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/0acc163a639c4a1d9ea5bb1df9f78c29.png" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/431a6349d39e421d84868140114528db.png" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/a55c6a0689f14ed1802b29b4011b9c37.png" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/91dd0539719c41b9be9e605b5687f37b.png" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/d6389673060c44b4b603df862a070bf1.png" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/644ffc6ab2f549e183acbbeb7faf1a96.png" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/784bc586fe3747ed9f531c59fc917c16.png" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/9061fed685894584af5252b1d962b7b3.png" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/7dcf2faa905b4055b40b42dad05a6bb7.png" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/0fe3825e7db04ecb943b889b6b55dbd6.png" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/ff1fb66bb51c46fda624d7e9392db989.png" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/08b84627bbb84a5fbcf92fb427f0cc64.png" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/e5493f8a7623483fbe38e522c7921d86.png" alt="在这里插入图片描述"><br>
+<img src="https://img-blog.csdnimg.cn/ba4b95e747de4f579311acb668aa4d57.png" alt="在这里插入图片描述"><br>
+步骤 17. 检查是否安装完成</p>
+<p>在桌面任意位置按鼠标右键会出现如下图所示 Git GUI Here 和 Git Bash Here 选项<br>
+注意：此项与步骤4中是否勾选Windows Explorer integration下的 Git GUI Here 和 Git Bash Here 相对应<br>
+若之前没有勾选这两个选项，请进行往下的一个步骤进行检测<br>
+———<img src="https://img-blog.csdnimg.cn/8e2ba0f09966441d8346478ee9b320a8.png" alt="在这里插入图片描述"><br>
+按下键盘键 win+R 调出运行框后按 cmd 调出命令提示符,输入 git --version 出现如下图相应版本信息号，则证明Git已安装完成<br>
+<img src="https://img-blog.csdnimg.cn/97ef1fea587841e99a274a70201ebbf5.png" alt="在这里插入图片描述"></p>
+</div>
+</body>
+
+</html>
